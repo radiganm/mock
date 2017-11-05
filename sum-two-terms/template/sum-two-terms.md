@@ -74,10 +74,10 @@ Note that in the implementation we are using the C++ behavior that of integral t
   \IF{$\Sigma \longeq h_{\Sigma-k} + h_k$}              
     \RETURN $\top$                      \COMMENT{check sum of terms holds}
   \ENDIF
-  \IF{2 | $\Sigma \land h_{\ceil{\frac{k}{2}}} \ge 2 $}
-    \RETURN $\top$                      \COMMENT{check two terms in histogram center}
-  \ENDIF
 \ENDFOR
+\IF{2 | $\Sigma \land h_{\ceil{\frac{k}{2}}} \ge 2 $}
+  \RETURN $\top$                      \COMMENT{check two terms in histogram center}
+\ENDIF
 \RETURN $\bot$
 \end{algorithmic}
 \label{eq:problem4Algorithm}
