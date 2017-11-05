@@ -10,6 +10,7 @@ target = sum-two-terms
 
 date = $(shell date +%F)
 
+package         = $(target)
 distributable   = ./dist
 include         = ./include
 markdown        = ./markdown

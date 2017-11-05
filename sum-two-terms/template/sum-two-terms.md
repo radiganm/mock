@@ -11,6 +11,7 @@ header-includes:
  - \usepackage{eqparbox}
  - \usepackage{wasysym}
  - \usepackage{graphicx}
+ - \usepackage{mathtools}
  - \bibliographystyle{IEEEtran}
 ---
 [//]: # sum-two-terms.md
@@ -20,6 +21,7 @@ header-includes:
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 \renewcommand{\algorithmiccomment}[1]{\hfill\eqparbox{COMMENT}{\APLcomment \mbox{  } #1}}
 \newcommand{\longeq}{\scalebox{2}[1]{=}}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
 ## Are The Individual Terms Of A Two-Term Sum Present In An Array?
 
@@ -71,6 +73,9 @@ Note that in the implementation we are using the C++ behavior that of integral t
 \FOR{$k \leftarrow 0 \cdots |\mathbb{X}|$}
   \IF{$\Sigma \longeq h_{\Sigma-k} + h_k$}              
     \RETURN $\top$                      \COMMENT{check sum of terms holds}
+  \ENDIF
+  \IF{2 | $\Sigma \land h_{\ceil{\frac{k}{2}}} \ge 2 $}
+    \RETURN $\top$                      \COMMENT{check two terms in histogram center}
   \ENDIF
 \ENDFOR
 \RETURN $\bot$
