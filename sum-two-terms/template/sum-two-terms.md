@@ -61,8 +61,6 @@ Scan the histogram up to half the number of bins, applying the formula: $$ n = (
 
 If the above equation holds for any element encountered, then two terms have been found that add to the given sum.
 
-Note that in the implementation we are using the C++ behavior that of integral type having a truth value of T if and only if their register value is non-zero.
-
 \begin{algorithm}
 \caption{Has Two Sum Terms}
 \begin{algorithmic}
@@ -153,8 +151,6 @@ class SequenceCheck
 
 
 ### Algorithm #2
-
-Note that Algorithm 2 currently does not enforce the selection of two terms in the sequence to be from two distinct different positions.
 
 #### Background
 
