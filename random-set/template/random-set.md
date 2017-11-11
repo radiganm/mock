@@ -45,7 +45,6 @@ On deletion of $x \colon T$, look up the containing cell $c$ from the map, say $
   \STATE{$ \mbox{let } c = Cell\left(x\right) $}
   \STATE{$ V_{end} \leftarrow c $}
   \STATE{$ M_{x} \leftarrow ref\{c\} $}
-  \RETURN $\top$
 \ENDIF
 \end{algorithmic}
 \label{eq:insert}

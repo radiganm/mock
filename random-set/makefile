@@ -79,7 +79,7 @@ dist: doc
 	mkdir -p $(distributable)/$(package)
 	rsync -avhr $(target).pdf $(distributable)/$(package)
 	rsync -avhr $(template)   $(distributable)/$(package)
-	rsync -avhr $(include)    $(distributable)/$(package)
+	#rsync -avhr $(include)    $(distributable)/$(package)
 	rsync -avhr $(source)     $(distributable)/$(package)
 	rsync -avhr makefile      $(distributable)/$(package)
 	(cd $(distributable); zip -r $(package)_$(date).zip $(package) )
