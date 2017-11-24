@@ -88,9 +88,9 @@ If the above equation holds for any element encountered, then two terms have bee
 |Measure                      |Performance    |
 |-----------------------------|--------------:|
 | average time complexity     | O(N)          |
-| worst case time complexity  | N + 1/2 M     |
+| worst case time complexity  | O(N + 1/2 M)  |
 |-----------------------------|---------------|
-| constant space complexity   | M             |
+| constant space complexity   | O(M)          |
 
 
 Note that time complexity assumptions for the average case are not strictly valid without knowledge of the underlying statistical distribution of the input data.
@@ -187,8 +187,6 @@ If the end of the sequence is reached without finding a matching $x$ in the comp
 \FOR{$k \leftarrow 0 \cdots |\mathbb{X}|$}
   \STATE{$\overbar{x} \leftarrow \Sigma - \mathbb{X}_k$}
   \STATE{$\mathbb{F}_{\overbar{x}} \leftarrow k$}     \COMMENT{map of compliments to position}
-\ENDFOR
-\FOR{$k \leftarrow 0 \cdots |\mathbb{X}|$}
   \IF{$\mathbb{X}_k \in \overbar{\mathbb{X}} \land \mathbb{F}_k \neq k$}
     \RETURN $\top$                                    \COMMENT{check are compliments present and distinct}
   \ENDIF
@@ -205,12 +203,12 @@ For a sequence $\mathbb{X}$, having N elements, we have:
 |Measure                         |Performance    |
 |--------------------------------|--------------:|
 | average time complexity        | O(N)          |
-| best case time complexity      | N + 1         |
-| worst case time complexity     | 2 * N         |
+| best case time complexity      | O(1)          |
+| worst case time complexity     | O(N)          |
 |--------------------------------|---------------|
 | average case space complexity  | O(N)          |
-| best  case space complexity    | 1             |
-| worst case space complexity    | N             |
+| best  case space complexity    | O(1)          |
+| worst case space complexity    | O(N)          |
 
 
 Note that the space complexity is dependent only on the number of unique elements in the input sequence ($\mathbb{X}$).
@@ -245,24 +243,20 @@ Note that for small M, algorithm 1 can have better worst case time complexity as
 // --------------------------------------------------------------------------
 bool has_two_sum_terms(const std::vector<T> &xs, const T sum)
 {
-  // hash map of compliments: CS := { c : sum-x=c forall x in xs }
-  std::unordered_map<T,std::size_t> compliments;
+  // hash map of xs_bar: CS := { c : sum-x=c forall x in xs }
+  std::unordered_map<T,std::size_t> xs_bar;
   for(auto k=0; k<xs.size(); ++k)
   {
     const T x = xs[k];
     const auto diff = sum - x; // caution: T must be a signed datatype
-    compliments[diff] = k;
+    xs_bar[diff] = k;
+    // scan the input sequence again to identify if any compliments are present
+    const auto x_bar = xs_bar.find(x);
+    // check that the compliment is at a distinct position from the original term
+    if( (x_bar!= xs_bar.end()) && (k != x_bar->second) ) return true;
   } // foreach index k of x in xs
-  // scan the input sequence again to identify if any compliments are present
-  for(auto k=0; k<xs.size(); ++k)
-  {
-    const T x = xs[k];
-    const auto it = compliments.find(x);
-    // check that the compliment is at a distict position from the original term
-    if( (it!= compliments.end()) && (k != it->second) ) return true;
-  } // foreach x in xs
   return false; // otherwise no such two terms
-} // has_two_terms
+} // has_two_sum_terms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

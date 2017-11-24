@@ -6,7 +6,7 @@
 
 .DEFAULT_GOAL := default
 
-target = sum-two-terms
+target = oop
 
 date = $(shell date +%F)
 
@@ -19,7 +19,11 @@ results         = ./results
 source          = ./src
 template        = ./template
 
-default: doc build
+#default: doc build
+default: build
+
+test:
+	$(MAKE) -C $(source) $@
 
 doc: pandoc
 
