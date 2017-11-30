@@ -8,7 +8,7 @@
 
 CC = gcc
 
-target  = oop
+target  = container
 suffx   = ansi_c
 results = $(target)__$(suffx)
 

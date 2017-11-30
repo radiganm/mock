@@ -6,7 +6,7 @@
 
 .DEFAULT_GOAL := default
 
-target = oop
+target = container
 
 date = $(shell date +%F)
 
